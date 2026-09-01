@@ -7,8 +7,9 @@ import exportRouter from "./routes/export.js";
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
-app.use(cors({ origin: "http://localhost:5173" }));
+// Middleware — allow requests from the frontend origin (set via env in production)
+const allowedOrigin = process.env.CORS_ORIGIN || "http://localhost:5173";
+app.use(cors({ origin: allowedOrigin }));
 app.use(express.json({ limit: "50mb" }));
 
 // Routes
